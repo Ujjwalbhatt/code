@@ -27,7 +27,7 @@ let AppController = class AppController {
     Strict Rules for the output:
     1. The output should not contain any special characters.
     2. The output should not contain ** or *.
-    3. The output should be under 500 characters.
+    3. The output should be strictly under 300 characters concise.
     4. The output should be paragraph not points.
     5. The output should be interesting and engaging.
     6. The output should be grammatically correct.
