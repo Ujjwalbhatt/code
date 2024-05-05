@@ -23,7 +23,7 @@ let AppService = class AppService {
         console.log(process.env.GEMINI_API_KEY);
         return 'Hello World!';
     }
-    async generateAIResponce(prompt) {
+    async generateAIResponse(prompt) {
         console.log(prompt);
         const result = await this.model.generateContent(prompt);
         const response = result.response;

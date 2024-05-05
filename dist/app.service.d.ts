@@ -3,5 +3,5 @@ export declare class AppService {
     private model;
     constructor();
     getHello(): string;
-    generateAIResponce(prompt: string): Promise<string>;
+    generateAIResponse(prompt: string): Promise<string>;
 }

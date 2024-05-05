@@ -15,7 +15,7 @@ export class AppService {
     return 'Hello World!';
   }
 
-  async generateAIResponce(prompt: string): Promise<string> {
+  async generateAIResponse(prompt: string): Promise<string> {
     console.log(prompt);
     const result = await this.model.generateContent(prompt);
     const response = result.response;
