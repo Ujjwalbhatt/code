@@ -40,8 +40,6 @@ export class AppController {
     12. The output should be free of verbosity.
     13. The output should be free of jargon.
     `;
-
-
     console.log(prompt);
     return this.appService.generateAIResponse(prompt);
   }
