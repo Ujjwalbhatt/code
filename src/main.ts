@@ -8,7 +8,7 @@ async function bootstrap() {
   app.enableCors();
 
   // Alternatively, you can specify the allowed origin(s)
-  // app.enableCors({ origin: 'https://joinarena.webflow.io' });
+  app.enableCors({ origin: 'https://joinarena.webflow.io' });
 
   await app.listen(3000);
 }
