@@ -24,7 +24,7 @@ export class AppService {
         { role: 'system', content: 'You are a helpful assistant.' },
         { role: 'user', content: prompt },
       ],
-      model: 'gpt-4-turbo-2024-04-09',
+      model: 'gpt-4-turbo',
       max_tokens: 150,
     });
     const response = completion.choices[0].message.content;
