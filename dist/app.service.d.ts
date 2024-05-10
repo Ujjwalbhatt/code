@@ -1,6 +1,5 @@
 export declare class AppService {
-    private genAI;
-    private model;
+    private openai;
     constructor();
     getHello(): string;
     generateAIResponse(prompt: string): Promise<string>;

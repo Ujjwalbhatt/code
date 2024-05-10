@@ -12,23 +12,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppService = void 0;
 const common_1 = require("@nestjs/common");
 const dotenv_1 = require("dotenv");
-const generative_ai_1 = require("@google/generative-ai");
+const openai_1 = require("openai");
 (0, dotenv_1.config)();
 let AppService = class AppService {
     constructor() {
-        this.genAI = new generative_ai_1.GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-        this.model = this.genAI.getGenerativeModel({ model: 'gemini-pro' });
+        this.openai = new openai_1.OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     }
     getHello() {
-        console.log(process.env.GEMINI_API_KEY);
+        console.log(process.env.OPENAI_API_KEY);
         return 'Hello World!';
     }
     async generateAIResponse(prompt) {
         console.log(prompt);
-        const result = await this.model.generateContent(prompt);
-        const response = result.response;
-        const text = response.text();
-        return text;
+        const completion = await this.openai.chat.completions.create({
+            messages: [
+                { role: 'system', content: 'You are a helpful assistant.' },
+                { role: 'user', content: prompt },
+            ],
+            model: 'gpt-4-turbo-2024-04-09',
+            max_tokens: 150,
+        });
+        const response = completion.choices[0].message.content;
+        return response;
     }
 };
 exports.AppService = AppService;

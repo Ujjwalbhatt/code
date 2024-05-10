@@ -1,25 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { config } from 'dotenv';
-import { GoogleGenerativeAI, GenerativeModel } from '@google/generative-ai';
+import { OpenAI } from 'openai';
+
 config();
 
 @Injectable()
 export class AppService {
-  private genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-  private model: GenerativeModel;
+  private openai: OpenAI;
+
   constructor() {
-    this.model = this.genAI.getGenerativeModel({ model: 'gemini-pro' });
+    this.openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
   }
+
   getHello(): string {
-    console.log(process.env.GEMINI_API_KEY);
+    console.log(process.env.OPENAI_API_KEY);
     return 'Hello World!';
   }
 
   async generateAIResponse(prompt: string): Promise<string> {
     console.log(prompt);
-    const result = await this.model.generateContent(prompt);
-    const response = result.response;
-    const text = response.text();
-    return text;
+    const completion = await this.openai.chat.completions.create({
+      messages: [
+        { role: 'system', content: 'You are a helpful assistant.' },
+        { role: 'user', content: prompt },
+      ],
+      model: 'gpt-4-turbo-2024-04-09',
+      max_tokens: 150,
+    });
+    const response = completion.choices[0].message.content;
+    return response;
   }
 }
