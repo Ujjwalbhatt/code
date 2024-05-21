@@ -4,22 +4,18 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Enable CORS for all origins
-  app.enableCors();
-
-  // Alternatively, you can specify the allowed origin(s)
   app.enableCors({
     origin: (origin, callback) => {
-      // Check whether the origin is one of the allowed origins
       if (!origin || /^https:\/\/(\w+\.)*joinarena\.ai$/.test(origin)) {
-        callback(null, true)
+        callback(null, true);
       } else {
-        callback(new Error('Not allowed by CORS'))
+        callback(new Error('Not allowed by CORS'), false);
       }
     },
-    credentials: true // Reflect the credentials setting if necessary
+    credentials: true
   });
 
   await app.listen(3000);
 }
-bootstrap();              
+
+bootstrap();
