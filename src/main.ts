@@ -6,9 +6,12 @@ async function bootstrap() {
 
   app.enableCors({
     origin: (origin, callback) => {
-      if (!origin || /^https:\/\/(\w+\.)*joinarena\.ai$/.test(origin)) {
+      console.log("Incoming origin:", origin); // Debug log to see the incoming origin
+      if (!origin || /^https:\/\/(\w+\.)*joinarena.ai$/.test(origin)) {
+        console.log("Allowed by CORS"); // Debug log when origin is allowed
         callback(null, true);
       } else {
+        console.log("Blocked by CORS"); // Debug log when origin is blocked
         callback(new Error('Not allowed by CORS'), false);
       }
     },
